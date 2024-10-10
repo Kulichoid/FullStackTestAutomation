@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.*;
 
@@ -29,10 +30,25 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Create a new lead using the API and verify its response")
   @Step("Create new Lead")
-  public void createNewLead(LeadDto body) {
+  public Response createNewLead(LeadDto body) {
     // Sends a POST request to create a new lead and validates the response
     Response response = sendCreateLeadRequest(body.getName(), body.getEmail());
     validateResponse(response, body.getName(), body.getEmail());
+    return response;
+  }
+
+  // Test method for deleting leads
+  @Test(description = "Test for deleting leads")
+  @Severity(SeverityLevel.NORMAL)
+  @Description("Create a new lead using the API and verify its response")
+  @Step("Delete lead")
+  public void deleteLead() {
+    // Create new testing lead for deleting
+    LeadDto leadDto = new LeadDto("Delete","delete@me.com");
+    int leadId = createNewLead(leadDto).getBody().path("id");
+    log.info("New leadId:{}", leadId);
+    // Sends a POST request to delete lead
+    Response response = sendDeleteLeadRequest(leadId);
   }
 
   @Step("Prepare request body for new Lead")
@@ -45,17 +61,35 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
   private Response sendCreateLeadRequest(String name, String email) {
     // Sends a POST request with LeadDto as the body and returns the response
     Response response =
-        given()
+        given().log().all()
             .body(
                 prepareCreateLeadRequest(
                     name, email)) // Prepares the request body with lead details
             .when()
             .post() // Sends a POST request to create the lead
             .then()
-            .log() // Logs the response only if validation fails
-            .ifValidationFails()
+            .log().all() // Logs the response only if validation fails
             .extract()
             .response(); // Extracts and returns the response
+
+    // Attaches the response body to the Allure report
+    Allure.addAttachment("Response Body", response.asString());
+    return response;
+  }
+
+  @Step("Send POST request to delete a lead")
+  private Response sendDeleteLeadRequest(int leadId) {
+    // Sends a POST request with LeadId param
+    Response response =
+        given()
+            .pathParam("leadId", leadId)
+            .when()
+            .delete("{leadId}")
+            .then()
+            .log()
+            .ifValidationFails()
+            .extract()
+            .response();
 
     // Attaches the response body to the Allure report
     Allure.addAttachment("Response Body", response.asString());
