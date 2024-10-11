@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="LeadController API Test Suite" verbose="1" parallel="false">
+
+    <!-- Test define for LeadController API -->
+    <test name="LeadController API Tests">
+        <classes>
+            <!-- Link to Test class -->
+            <class name="cz.crowire.be_tests.restassured.LeadControllerRestAssuredTest">
+                <methods>
+                    <!-- Separate methods specification -->
+                    <include name="createNewLead"/>
+                    <include name="getAllLeads"/>
+                    <include name="deleteLead"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
