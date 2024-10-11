@@ -5,10 +5,12 @@ import cz.crowire.be_tests.config.RestAssuredConfigSetup;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -150,5 +152,14 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
 
     // Attach the full response body to Allure report
     Allure.addAttachment("Response Body", response.asString());
+  }
+
+  @AfterMethod
+  public void cleanUp() {
+    // Find all leads and clean testing data
+    List<Integer> leadIds = sendGetLeadRequest().jsonPath().getList("id");
+    for (Integer leadId : leadIds) {
+      sendDeleteLeadRequest(leadId);
+    }
   }
 }
