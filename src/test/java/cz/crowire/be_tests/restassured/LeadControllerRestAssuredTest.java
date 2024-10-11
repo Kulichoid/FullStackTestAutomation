@@ -22,11 +22,13 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
   // DataProvider supplies test data for createNewLead test
   @DataProvider(name = "leadDataProvider")
   public LeadDto[][] leadDataProvider() {
-    return new LeadDto[][] {
-      {new LeadDto("John Doe", "john.doe@example.com")}, // valid lead data
-      {new LeadDto("Jane Doe", "jane.doe@example.com")}, // valid lead data
-      {new LeadDto("Invalid Lead", "")} // invalid lead data (empty email)
+    LeadDto[][] data = new LeadDto[][] {
+            {new LeadDto("John Doe", "john.doe@example.com")}, // valid lead data
+            {new LeadDto("Jane Doe", "jane.doe@example.com")}, // valid lead data
+            {new LeadDto("Invalid Lead", "")} // invalid lead data (empty email)
     };
+    log.info("DataProvider created with {} sets of data", data.length);
+    return data;
   }
 
   // Test method for creating a new lead, uses data from DataProvider
@@ -34,7 +36,7 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Create a new lead using the API and verify its response")
   @Step("Create new Lead")
-  public Response createNewLead(LeadDto body) {
+  public void createNewLead(LeadDto body) {
     // Sends a POST request to create a new lead and validates the response
     Response response = sendCreateLeadRequest(body.getName(), body.getEmail());
     // Define expected fields and values for validation
@@ -43,7 +45,6 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
     expectedFields.put("email", body.getEmail());
     // Validate the response using the generic method
     validateApiResponse(response, 201, expectedFields);
-    return response;
   }
 
   // Test method for getting all leads
@@ -63,7 +64,7 @@ public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
   public void deleteLead() {
     // Create new testing lead for deleting
     LeadDto leadDto = new LeadDto("Delete", "delete@me.com");
-    int leadId = createNewLead(leadDto).getBody().path("id");
+    int leadId = sendCreateLeadRequest(leadDto.getName(),leadDto.getEmail()).getBody().path("id");
     log.info("New testing leadId:{}", leadId);
     // Sends a POST request to delete lead
     validateApiResponse(sendDeleteLeadRequest(leadId), 204, null);
