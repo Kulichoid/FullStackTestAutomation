@@ -1,4 +1,4 @@
-package cz.crowire.be_tests.config;
+package cz.crowire.restassured.config;
 
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;

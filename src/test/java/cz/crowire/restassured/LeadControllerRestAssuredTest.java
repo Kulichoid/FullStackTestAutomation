@@ -1,7 +1,7 @@
-package cz.crowire.be_tests.restassured;
+package cz.crowire.restassured;
 
-import cz.crowire.be_tests.common.LeadDto;
-import cz.crowire.be_tests.config.RestAssuredConfigSetup;
+import cz.crowire.common.LeadDto;
+import cz.crowire.restassured.config.RestAssuredConfigSetup;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;

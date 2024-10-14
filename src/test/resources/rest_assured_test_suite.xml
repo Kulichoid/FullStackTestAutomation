@@ -4,7 +4,7 @@
     <test name="LeadController API Tests">
         <classes>
             <!-- Link to Test class -->
-            <class name="cz.crowire.be_tests.restassured.LeadControllerRestAssuredTest">
+            <class name="cz.crowire.restassured.LeadControllerRestAssuredTest">
                 <methods>
                     <!-- Separate methods specification -->
                     <include name="createNewLead"/>

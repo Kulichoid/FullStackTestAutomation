@@ -1,4 +1,4 @@
-package cz.crowire.be_tests.common;
+package cz.crowire.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

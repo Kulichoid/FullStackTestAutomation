@@ -1,6 +1,6 @@
-package cz.crowire.be_tests.helpers;
+package cz.crowire.helpers;
 
-import cz.crowire.be_tests.common.LeadDto;
+import cz.crowire.common.LeadDto;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
