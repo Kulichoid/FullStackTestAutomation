@@ -1,4 +1,4 @@
-package cz.crowire.restassured;
+package cz.crowire.restassured.tests;
 
 import cz.crowire.common.LeadDto;
 import cz.crowire.restassured.config.RestAssuredConfigSetup;
@@ -17,6 +17,7 @@ import static io.restassured.RestAssured.given;
 import static org.testng.Assert.*;
 
 @Slf4j
+@Epic("Rest Assured tests")
 public class LeadControllerRestAssuredTest extends RestAssuredConfigSetup {
 
   // DataProvider supplies test data for createNewLead test

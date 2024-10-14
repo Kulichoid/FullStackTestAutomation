@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LeadCreatedPage {
-  private WebDriver driver;
+  private final WebDriver driver;
 
   // Locator for the lead ID element
-  private By leadIdText = By.xpath("//span[@th:text='${leadId}']");
-  private By createAnotherLeadLink = By.linkText("Create another lead");
+  private final By leadIdText = By.id("leadId");
+  private final By createAnotherLeadLink = By.linkText("Create another lead");
 
   // Constructor
   public LeadCreatedPage(WebDriver driver) {
