@@ -43,3 +43,4 @@ This project serves as a demo of my full-stack test automation skills.
 ## Future Enhancements
 - Add more comprehensive tests for both BE and FE.
 - Integrate CI/CD pipelines.
+- Incorporate additional testing technologies such as Cypress and Playwright for further UI and end-to-end testing.
