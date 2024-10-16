@@ -36,9 +36,8 @@ public class CreateLeadTest {
     log.info("Starting test for creating a new lead.");
 
     // Enter lead details
-    createLeadPage.enterName("John Doe");
-    createLeadPage.enterEmail("john.doe@example.com");
-    log.info("Entered name and email.");
+    setFieldName("John Doe");
+    setFieldEmail("john.doe@example.com");
 
     // Submit the form
     createLeadPage.submitForm();
@@ -73,15 +72,13 @@ public class CreateLeadTest {
     checkValidation("name");
 
     // Enter name
-    createLeadPage.enterName("John Doe");
+    setFieldName("John Doe");
 
     // Try to submit the form without email
     createLeadPage.submitForm();
 
     // Check if the validation message for the email field is correct
     checkValidation("email");
-
-
   }
 
   @Step("Check field validation")
@@ -91,6 +88,16 @@ public class CreateLeadTest {
     Assert.assertEquals(
         validationMessage, "Vyplňte prosím toto pole.", "Validation message should be displayed");
     log.info("Validation for field {} correctly displayed", id);
+  }
+
+  @Step("Fill the Name field")
+  private void setFieldName(String name) {
+    createLeadPage.enterName(name);
+  }
+
+  @Step("Fill the email field")
+  private void setFieldEmail(String email) {
+    createLeadPage.enterName(email);
   }
 
   @AfterClass
