@@ -37,9 +37,6 @@ This will start the lead management application, which serves as the target for 
   - `/restassured`: Contains API tests.
   - `/selenium`: Contains UI tests.
 
-## Purpose
-This project serves as a demo of my full-stack test automation skills.
-
 ## Future Enhancements
 - Add more comprehensive tests for both BE and FE.
 - Integrate CI/CD pipelines.
