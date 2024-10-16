@@ -12,6 +12,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static java.lang.Thread.sleep;
+
 @Slf4j
 @Epic("Selenium tests")
 public class CreateLeadTest {
@@ -32,7 +34,7 @@ public class CreateLeadTest {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test the creation of a new lead and verify the lead ID is displayed")
   @Step("Create a new lead with name and email")
-  public void createNewLead() {
+  public void createNewLead() throws InterruptedException {
     log.info("Starting test for creating a new lead.");
 
     // Enter lead details
@@ -97,7 +99,7 @@ public class CreateLeadTest {
 
   @Step("Fill the email field")
   private void setFieldEmail(String email) {
-    createLeadPage.enterName(email);
+    createLeadPage.enterEmail(email);
   }
 
   @AfterClass
